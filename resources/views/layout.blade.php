@@ -14,6 +14,13 @@
         <li><a class="{{ request()->routeIs('posts.create') ? 'active' : ''}}" href="{{route('posts.create')}}">Create Post</a></li>
 
     </ul>
+
+    @if (session('success'))
+        <div class="flash-success">
+            {{ session('success')}}
+        </div>
+    @endif
+
     <div class="name">
         @yield('content')
     </div>
