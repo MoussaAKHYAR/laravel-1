@@ -27,6 +27,10 @@ Route::get('/posts/create', function () {
 })->name('posts.create');
 
 Route::post('/posts', function (Request $request) {
+    $request->validate([
+        'title' => 'required',
+        'description' => ['required', 'min:10']
+    ]);
     return redirect()
         ->route('posts.create')
         ->with('success', 'Post is submitted! Title: '.
