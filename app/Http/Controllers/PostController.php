@@ -7,23 +7,14 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        return view('posts.create');
+        
     }
 
     /**
@@ -34,7 +25,16 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'description' => ['required', 'min:10']
+        ]);
+        return redirect()
+            ->route('posts.create')
+            ->with('success', 'Post is submitted! Title: '.
+            $request->input('title').' Description: '.
+            $request->input('description'));
+
     }
 
     /**
