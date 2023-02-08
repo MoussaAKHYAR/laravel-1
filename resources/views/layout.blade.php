@@ -15,20 +15,13 @@
 
     </ul>
 
+    @includeWhen($errors->any(),'_errors')
+
     @if (session('success'))
         <div class="flash-success">
             {{ session('success')}}
         </div>
     @endif
-
-    {{-- @if ($errors->any())
-        <div class="flash-error">
-            @foreach ($errors->all() as $error)
-                <p>{{$error}}</p>
-            @endforeach
-            <b>There are some errors in your submission</b>
-        </div>
-    @endif --}}
 
     <div class="name">
         @yield('content')
