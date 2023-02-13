@@ -45,14 +45,11 @@ class PostController extends Controller
     }
 
 
-    public function update(Request $request, Post $post)
+    public function update(PostFormRequest $request, Post $post)
     {
-        $request->validated();
+        $validated = $request->validated();
 
-        $post->title = $request->input('title');
-        $post->description = $request->input('description');
-
-        $post->save();
+        $post->update($validated);
 
         return redirect()->route('posts.show',[$post])->with('success', 'Post is updated');
     }
