@@ -29,7 +29,7 @@ class PostController extends Controller
         $post->save();
 
         return redirect()
-            ->route('posts.create')
+            ->route('posts.show',[$post])
             ->with('success', 'Post is submitted! Title: '.
             $post->title.' Description: '.
             $post->description);
@@ -37,36 +37,34 @@ class PostController extends Controller
     }
 
 
-    public function show($id)
+    public function show(Post $post)
     {
         return view('posts.show',
-            ['post' => Post::findOrfail($id)]
+            ['post' => $post]
         );
     }
 
-    public function edit($id)
+    public function edit(Post $post)
     {
         return view('posts.edit',
-            ['post' => Post::findOrfail($id)]
+            ['post' => $post]
         );
     }
 
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
         $request->validate([
             'title' => 'required',
             'description' => ['required', 'min:10']
         ]);
 
-        $post = Post::findOrfail($id);
-
         $post->title = $request->input('title');
         $post->description = $request->input('description');
 
         $post->save();
 
-        return redirect()->route('posts.show',['post' => $post])->with('success', 'Post is updated');
+        return redirect()->route('posts.show',[$post])->with('success', 'Post is updated');
     }
 
     public function destroy($id)

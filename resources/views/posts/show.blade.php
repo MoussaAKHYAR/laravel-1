@@ -7,7 +7,7 @@
     <div class="post-content">
         <h2>{{$post->title}}</h2>
         <p>{{$post->description}}</p>
-        <a href="{{route('posts.edit', ['post' => $post->id])}}">Edit post</a>
+        <a href="{{route('posts.edit', [$post])}}">Edit post</a>
     </div>
 </div>
 @endsection

@@ -6,7 +6,7 @@
         <h1>
             Update blog post
         </h1>
-       <form action="{{route('posts.update', ['post' => $post->id])}}" method="post">
+       <form action="{{route('posts.update', [$post])}}" method="post">
         @csrf
         @method('PUT')
             <label>Title</label>
